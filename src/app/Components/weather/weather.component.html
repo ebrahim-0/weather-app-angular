@@ -1,0 +1,148 @@
+@if(loading){
+
+<div
+  class="flex items-center justify-center"
+  style="height: calc(100vh - 90px)"
+>
+  <div
+    class="w-16 h-16 border-b-4 border-blue-500 rounded-full animate-spin"
+  ></div>
+  <p class="text-lg text-blue-700 font-semibold ml-4">Fetching Weather...</p>
+</div>
+
+} @else { @if(!errorMsg){
+<div
+  [appBackgroundColor]="weatherData.main.temp"
+  [boxShadow]="true"
+  class="max-w-4xl m-7 md:mx-auto my-7 p-6 bg-white rounded-lg shadow-md dark:bg-gray-800"
+>
+  <h2
+    class="text-2xl font-semibold text-gray-800 dark:text-white mb-6 text-center"
+  >
+    Weather Details for {{ weatherData.name }}
+  </h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="text-center">
+      <p class="text-gray-600 dark:text-gray-400">Temperature</p>
+      <p
+        class="text-xl font-bold uppercase"
+        [appBackgroundColor]="weatherData.main.temp"
+      >
+        {{
+          weatherData.main.temp
+            | temperatureConversion : unit
+            | number : "1.2-2"
+        }}
+        °{{ unit }}
+      </p>
+    </div>
+    <div class="text-center">
+      <p class="text-gray-600 dark:text-gray-400">Feels Like</p>
+      <p
+        class="text-xl font-bold uppercase"
+        [appBackgroundColor]="weatherData.main.temp"
+      >
+        {{
+          weatherData.main.feels_like
+            | temperatureConversion : unit
+            | number : "1.2-2"
+        }}
+        °{{ unit }}
+      </p>
+    </div>
+    <div class="text-center">
+      <p class="text-gray-600 dark:text-gray-400">Weather</p>
+      <p class="text-lg font-medium text-gray-800 dark:text-white">
+        {{ weatherData.weather[0].main }} /
+        {{ weatherData.weather[0].description }}
+      </p>
+    </div>
+    <div class="text-center">
+      <p class="text-gray-600 dark:text-gray-400">Cloudiness</p>
+      <p class="text-lg font-medium text-gray-800 dark:text-white">
+        {{ weatherData.clouds.all }}%
+      </p>
+    </div>
+  </div>
+  <hr class="my-6 border-gray-300 dark:border-gray-700" />
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="text-center">
+      <p class="text-gray-600 dark:text-gray-400">Minimum Temperature</p>
+      <p
+        class="text-xl font-bold uppercase"
+        [appBackgroundColor]="weatherData.main.temp"
+      >
+        {{
+          weatherData.main.temp_min
+            | temperatureConversion : unit
+            | number : "1.2-2"
+        }}
+        °{{ unit }}
+      </p>
+    </div>
+    <div class="text-center">
+      <p class="text-gray-600 dark:text-gray-400">Maximum Temperature</p>
+      <p
+        class="text-xl font-bold uppercase"
+        [appBackgroundColor]="weatherData.main.temp"
+      >
+        {{
+          weatherData.main.temp_max
+            | temperatureConversion : unit
+            | number : "1.2-2"
+        }}
+        °{{ unit }}
+      </p>
+    </div>
+    <div class="text-center">
+      <p class="text-gray-600 dark:text-gray-400">Rain (1h)</p>
+      <p class="text-lg font-medium text-gray-800 dark:text-white">
+        @if(weatherData.rain && weatherData.rain['1h']){
+
+        {{ weatherData.rain["1h"] }} mm } @else { No Rain. }
+      </p>
+    </div>
+    <div class="text-center">
+      <p class="text-gray-600 dark:text-gray-400">Wind</p>
+      <p class="text-lg font-medium text-gray-800 dark:text-white">
+        {{ weatherData.wind.speed }} m/s at {{ weatherData.wind.deg }}°
+      </p>
+    </div>
+  </div>
+  <hr class="my-6 border-gray-300 dark:border-gray-700" />
+  <div class="flex justify-between items-center">
+    <div class="text-center">
+      <p class="text-gray-600 dark:text-gray-400">Sunset</p>
+      <p class="text-lg font-medium text-gray-800 dark:text-white">
+        {{ convertUnixTimestamp(weatherData.sys.sunset) | date : "shortTime" }}
+      </p>
+    </div>
+
+    <div class="flex justify-center mt-6">
+      <img
+        class="h-20 w-20"
+        src="http://openweathermap.org/img/wn/{{
+          weatherData.weather[0].icon
+        }}.png"
+        alt="Weather Icon"
+      />
+    </div>
+
+    <div class="text-center">
+      <p class="text-gray-600 dark:text-gray-400">Sunrise</p>
+      <p class="text-lg font-medium text-gray-800 dark:text-white">
+        {{ convertUnixTimestamp(weatherData.sys.sunrise) | date : "shortTime" }}
+      </p>
+    </div>
+  </div>
+</div>
+
+} @else {
+
+<p
+  class="text-center text-gray-600 dark:text-gray-400 text-xl flex items-center justify-center"
+  style="height: calc(100vh - 90px)"
+>
+  @if(errorMsg){{{errorMsg}}} @else { No weather data available. }
+</p>
+} }
