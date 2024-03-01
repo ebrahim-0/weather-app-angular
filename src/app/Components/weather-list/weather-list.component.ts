@@ -21,7 +21,7 @@ export class WeatherListComponent implements OnInit {
   countries: Countries[] = [] as Countries[];
   allCountries: Countries[] = [] as Countries[];
   sliceStart = 0;
-  sliceEnd = 18;
+  sliceEnd = 12;
 
   ngOnInit(): void {
     this.loadInitialCountries();
