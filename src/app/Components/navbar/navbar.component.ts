@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -12,9 +12,9 @@ import { RouterModule } from '@angular/router';
 export class NavbarComponent {
   location: string = '';
 
-  @Output() searchLocation = new EventEmitter<string>();
+  constructor(private _Router: Router) {}
 
-  searchWeather() {
-    this.searchLocation.emit(this.location);
+  getWeather() {
+    this._Router.navigate(['/weather', this.location]);
   }
 }

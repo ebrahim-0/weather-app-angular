@@ -43,16 +43,16 @@
           <li class="flex space-x-3">
             <input
               type="text"
-              class="p-2 border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700"
-              placeholder="Enter location"
+              class="w-56 flex-grow p-2 transition duration-300 border rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-200 focus:outline-none shadow-sm"
+              placeholder="Get Weather by City Name"
               [(ngModel)]="location"
-              (ngModelChange)="searchWeather()"
+              (keyup.enter)="getWeather()"
             />
             <button
               class="p-2 bg-blue-500 text-white rounded-lg dark:bg-blue-700"
-              (click)="searchWeather()"
+              (click)="getWeather()"
             >
-              Search
+              Get Weather
             </button>
           </li>
         </ul>

@@ -17,13 +17,8 @@ export const appConfig: ApplicationConfig = {
       useValue: 'ce9d642e471b47b8b5b12a0d8a55db11',
     },
     {
-      provide: 'NEW_COUNTRIES_API_URL',
-      useValue: 'https://restcountries.com/v3.1/all',
-    },
-
-    {
       provide: 'COUNTRIES_API_URL',
-      useValue: 'https://country-api-dyy4.onrender.com',
+      useValue: 'https://restcountries.com/v3.1/all',
     },
   ],
 };
