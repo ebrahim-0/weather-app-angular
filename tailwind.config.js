@@ -1,13 +1,11 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    "./src/**/*.{html,ts}",
-    "./node_modules/flowbite/**/*.js", // add this line
-  ],
+  darkMode: "class",
+  content: ["./src/**/*.{html,ts}", "./node_modules/flowbite/**/*.js"],
   theme: {
     extend: {
       animation: {
-        "pulse-color": "pulse-color 2s infinite", // Define a new animation named 'pulseColor' with a duration of 2 seconds and infinite looping
+        "pulse-color": "pulse-color 2s infinite",
       },
       keyframes: {
         "pulse-color": {
