@@ -33,7 +33,7 @@
     @for (country of countries; track $index){
     <div
       [routerLink]="['/weather', country.capital && country.capital[0]]"
-      class="flex items-center justify-start p-6 bg-white transition duration-300 border rounded-lg hover:shadow-xl cursor-pointer dark:bg-gray-800 dark:text-white"
+      class="flex items-center justify-start p-6 bg-white transition duration-300 border rounded-lg hover:shadow-xl dark:shadow-gray-300 cursor-pointer dark:bg-gray-800 dark:text-white"
     >
       <img
         [src]="country.flags.png"
